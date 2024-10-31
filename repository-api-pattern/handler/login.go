@@ -14,6 +14,7 @@ import (
 
 func Login(db *sql.DB) {
 
+	// input
 	user := model.Customer{}
 	file, err := os.Open("body.json")
 
@@ -27,6 +28,7 @@ func Login(db *sql.DB) {
 		fmt.Println("error decoding JSON: ", err)
 	}
 
+	// proses
 	repo := repository.NewCustomerRepository(db)
 	customerService := service.NewCustomerService(repo)
 
@@ -36,6 +38,7 @@ func Login(db *sql.DB) {
 		fmt.Println("Error : ", err)
 	}
 
+	// output
 	jsonData, err := json.MarshalIndent(result, " ", "")
 
 	if err != nil {

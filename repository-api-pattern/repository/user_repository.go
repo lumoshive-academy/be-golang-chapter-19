@@ -49,7 +49,7 @@ func (r *CustomerRepositoryDB) GetAll() (*[]model.Customer, error) {
 	return &customers, nil
 }
 
-func (r *CustomerRepositoryDB) GetCustumerLogin(customer model.Customer) (*model.Customer, error) {
+func (r *CustomerRepositoryDB) GetCustomerLogin(customer model.Customer) (*model.Customer, error) {
 	query := `SELECT id, username, password, email FROM customers WHERE username=$1 AND password=$2`
 	var customerResponse model.Customer
 	err := r.DB.QueryRow(query, customer.Username, customer.Password).Scan(&customerResponse.ID, &customerResponse.Username, &customerResponse.Password, &customerResponse.Email)

@@ -67,7 +67,7 @@ func (cs *CustomerService) GetAllDataUser() error {
 
 func (cs *CustomerService) LoginService(user model.Customer) (*model.Response, error) {
 
-	customers, err := cs.RepoCustomer.GetCustumerLogin(user)
+	customers, err := cs.RepoCustomer.GetCustomerLogin(user)
 
 	if err != nil {
 		return nil, err
