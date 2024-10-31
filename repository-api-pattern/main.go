@@ -16,7 +16,7 @@ func main() {
 	defer db.Close()
 
 	var endpoint string
-	fmt.Print("masukkan enpoint : ")
+	fmt.Print("masukkan endpoint : ")
 	fmt.Scan(&endpoint)
 
 	switch endpoint {

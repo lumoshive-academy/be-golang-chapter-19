@@ -32,18 +32,35 @@ func Login(db *sql.DB) {
 	repo := repository.NewCustomerRepository(db)
 	customerService := service.NewCustomerService(repo)
 
-	result, err := customerService.LoginService(user)
+	customer, err := customerService.LoginService(user)
 
 	if err != nil {
-		fmt.Println("Error : ", err)
+		response := model.Response{
+			StatusCode: 404,
+			Message:    "Account not found",
+			Data:       nil,
+		}
+		jsonData, err := json.MarshalIndent(response, " ", " ")
+
+		if err != nil {
+			fmt.Println("err :", err)
+		}
+
+		fmt.Println(string(jsonData))
+	} else {
+		// output
+		response := model.Response{
+			StatusCode: 200,
+			Message:    "login success",
+			Data:       customer,
+		}
+		jsonData, err := json.MarshalIndent(response, " ", "")
+
+		if err != nil {
+			fmt.Println("err :", err)
+		}
+
+		fmt.Println(string(jsonData))
 	}
 
-	// output
-	jsonData, err := json.MarshalIndent(result, " ", "")
-
-	if err != nil {
-		fmt.Println("err :", err)
-	}
-
-	fmt.Println(string(jsonData))
 }

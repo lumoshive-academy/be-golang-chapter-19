@@ -65,17 +65,20 @@ func (cs *CustomerService) GetAllDataUser() error {
 
 }
 
-func (cs *CustomerService) LoginService(user model.Customer) (*model.Response, error) {
+func (cs *CustomerService) LoginService(user model.Customer) (*model.Customer, error) {
+
+	if user.Username == "" {
+		return nil, errors.New("username tidak boleh kosong")
+	}
+	if user.Password == "" {
+		return nil, errors.New("password tidak boleh kosong")
+	}
 
 	customers, err := cs.RepoCustomer.GetCustomerLogin(user)
 
 	if err != nil {
 		return nil, err
 	}
-	response := model.Response{
-		StatusCode: 200,
-		Message:    "login success",
-		Data:       customers,
-	}
-	return &response, nil
+
+	return customers, nil
 }
