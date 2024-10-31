@@ -34,6 +34,7 @@ func Login(db *sql.DB) {
 
 	customer, err := customerService.LoginService(user)
 
+	// output
 	if err != nil {
 		response := model.Response{
 			StatusCode: 404,
@@ -48,7 +49,7 @@ func Login(db *sql.DB) {
 
 		fmt.Println(string(jsonData))
 	} else {
-		// output
+
 		response := model.Response{
 			StatusCode: 200,
 			Message:    "login success",
